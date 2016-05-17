@@ -1,2 +1,2 @@
 # VanGO
-An Android controllable robot that identifies images.
+This is the server for a Raspberry Pi Rover.
