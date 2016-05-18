@@ -1,8 +1,8 @@
-from subprocess import call
+import RPi.GPIO as GPIO
 import socket
 import sys
+from subprocess import call
 from thread import *
-import RPi.GPIO as GPIO
 from time import sleep
 
 GPIO.setmode(GPIO.BOARD)
@@ -69,6 +69,7 @@ def clientthread(conn):
             GPIO.output(Motor2E,GPIO.HIGH)
 
         elif data=='1':
+
             #Forward
             GPIO.output(Motor1A,GPIO.HIGH)
             GPIO.output(Motor1B,GPIO.LOW)
