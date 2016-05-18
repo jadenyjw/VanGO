@@ -15,6 +15,8 @@ Motor2A = 23
 Motor2B = 21
 Motor2E = 19
 
+LED = 13
+
 GPIO.setup(Motor1A,GPIO.OUT)
 GPIO.setup(Motor1B,GPIO.OUT)
 GPIO.setup(Motor1E,GPIO.OUT)
@@ -22,6 +24,8 @@ GPIO.setup(Motor1E,GPIO.OUT)
 GPIO.setup(Motor2A,GPIO.OUT)
 GPIO.setup(Motor2B,GPIO.OUT)
 GPIO.setup(Motor2E,GPIO.OUT)
+
+GPIO.setup(LED, GPIO.OUT)
 
 HOST = ''   # Symbolic name meaning all available interfaces
 PORT = 8888 # Arbitrary non-privileged port
@@ -53,7 +57,8 @@ def clientthread(conn):
         data = conn.recv(1024)
         
         print data
-        if data=='0\n':
+        if data=='0':
+
             #Backward
             GPIO.output(Motor1A,GPIO.LOW)
             GPIO.output(Motor1B,GPIO.HIGH)
@@ -62,12 +67,8 @@ def clientthread(conn):
             GPIO.output(Motor2A,GPIO.LOW)
             GPIO.output(Motor2B,GPIO.HIGH)
             GPIO.output(Motor2E,GPIO.HIGH)
-            
-          
-            
-            
- 
-        elif data=='1\n':
+
+        elif data=='1':
             #Forward
             GPIO.output(Motor1A,GPIO.HIGH)
             GPIO.output(Motor1B,GPIO.LOW)
@@ -76,10 +77,9 @@ def clientthread(conn):
             GPIO.output(Motor2A,GPIO.HIGH)
             GPIO.output(Motor2B,GPIO.LOW)
             GPIO.output(Motor2E,GPIO.HIGH)
-            
-         
-            
-        elif data=='2\n':
+       
+        elif data=='2':
+
              #Right
             GPIO.output(Motor1A,GPIO.HIGH)
             GPIO.output(Motor1B,GPIO.LOW)
@@ -88,9 +88,9 @@ def clientthread(conn):
             GPIO.output(Motor2A,GPIO.LOW)
             GPIO.output(Motor2B,GPIO.HIGH)
             GPIO.output(Motor2E,GPIO.HIGH)
-            
-            
-        elif data=='3\n':
+      
+        elif data=='3':
+
             #Left
             GPIO.output(Motor2A,GPIO.HIGH)
             GPIO.output(Motor2B,GPIO.LOW)
@@ -100,17 +100,20 @@ def clientthread(conn):
             GPIO.output(Motor1B,GPIO.HIGH)
             GPIO.output(Motor1E,GPIO.HIGH)
         
-        elif data=='4\n':
+        elif data=='4':
+
             #Stop
             GPIO.output(Motor1E,GPIO.LOW)
             GPIO.output(Motor2E,GPIO.LOW)
             
-        elif data=='5\n':
+        elif data=='5':
+
             print 'Camera Up'
-        elif data=='6\n':
+
+        elif data=='6':
+
             print 'Camera Down'
-       
-        
+     
         if not data: 
             break
      
@@ -124,8 +127,6 @@ while 1:
     #wait to accept a connection - blocking call
     conn, addr = s.accept()
     print 'Connected with ' + addr[0] + ':' + str(addr[1])
-     
-    #start new thread takes 1st argument as a function name to be run, second is the tuple of arguments to the function.
     start_new_thread(clientthread ,(conn,))
  
 s.close()
