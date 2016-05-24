@@ -1,1 +1,1 @@
-cvlc --sout=#rtp{sdp=rtsp://:8554/vango} 'v4l2:///dev/video0:chroma=H264:width=800:height=600:fps=30'
+raspivid -o - -t 0 -n | cvlc -vvv stream:///dev/video0 --sout '#rtp{sdp=rtsp://:8554/}' :demux=h264
