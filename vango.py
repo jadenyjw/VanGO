@@ -16,7 +16,7 @@ Motor2B = 38
 Motor2E = 40
 
 LED = 32
-Servo = 22
+Servo = 12
 
 GPIO.setup(Motor1A,GPIO.OUT)
 GPIO.setup(Motor1B,GPIO.OUT)
@@ -29,6 +29,8 @@ GPIO.setup(Motor2E,GPIO.OUT)
 GPIO.setup(LED, GPIO.OUT)
 
 GPIO.setup(Servo, GPIO.OUT)
+pwm = GPIO.PWM(Servo, 100)
+pwm.start(5)
 
 HOST = ''   # Symbolic name meaning all available interfaces
 PORT = 8888 # Arbitrary non-privileged port
@@ -50,6 +52,8 @@ s.listen(10)
 print 'Socket now listening'
 
 print "Now running at: " + socket.gethostbyname(socket.gethostname()) + ":" + str(PORT)
+
+GPIO.output(LED,GPIO.HIGH)
  
 #Function for handling connections. This will be used to create threads
 def clientthread(conn):
@@ -112,11 +116,13 @@ def clientthread(conn):
             
         elif data=='5':
 
-            print 'Camera Up'
+              duty = float(60) / 10.0 + 2.5
+              pwm.ChangeDutyCycle(duty)
 
         elif data=='6':
 
-            print 'Camera Down'
+              duty = float(20) / 10.0 + 2.5
+              pwm.ChangeDutyCycle(duty)
      
         if not data: 
             break
