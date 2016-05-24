@@ -1,9 +1,9 @@
-<<<<<<< HEAD
+
 
 import socket
 import sys
 from thread import *
-=======
+
 import RPi.GPIO as GPIO
 import socket
 import sys
@@ -35,7 +35,7 @@ GPIO.setup(Motor2E,GPIO.OUT)
 
 GPIO.setup(LED,GPIO.OUT)
 GPIO.setup(Servo,GPIO.OUT)
->>>>>>> 8c9c445f511ed8d0907c1f9d6efdd47c09ecb850
+
 
 HOST = ''   # Symbolic name meaning all available interfaces
 PORT = 8888 # Arbitrary non-privileged port
@@ -67,7 +67,7 @@ def clientthread(conn):
         data = conn.recv(1024)
         
         print data
-<<<<<<< HEAD
+
 
         if data=='0':
 	  print 'back'
@@ -85,65 +85,6 @@ def clientthread(conn):
         
         elif data=='4':
 	  print 'stop'
-=======
-        if data=='0':
-
-            #Backward
-            GPIO.output(Motor1A,GPIO.LOW)
-            GPIO.output(Motor1B,GPIO.HIGH)
-            GPIO.output(Motor1E,GPIO.HIGH)
-            
-            GPIO.output(Motor2A,GPIO.LOW)
-            GPIO.output(Motor2B,GPIO.HIGH)
-            GPIO.output(Motor2E,GPIO.HIGH)
-
-        elif data=='1':
-
-            #Forward
-            GPIO.output(Motor1A,GPIO.HIGH)
-            GPIO.output(Motor1B,GPIO.LOW)
-            GPIO.output(Motor1E,GPIO.HIGH)
-            
-            GPIO.output(Motor2A,GPIO.HIGH)
-            GPIO.output(Motor2B,GPIO.LOW)
-            GPIO.output(Motor2E,GPIO.HIGH)
-       
-        elif data=='2':
-
-             #Right
-            GPIO.output(Motor1A,GPIO.HIGH)
-            GPIO.output(Motor1B,GPIO.LOW)
-            GPIO.output(Motor1E,GPIO.HIGH)
-            
-            GPIO.output(Motor2A,GPIO.LOW)
-            GPIO.output(Motor2B,GPIO.HIGH)
-            GPIO.output(Motor2E,GPIO.HIGH)
-      
-        elif data=='3':
-
-            #Left
-            GPIO.output(Motor2A,GPIO.HIGH)
-            GPIO.output(Motor2B,GPIO.LOW)
-            GPIO.output(Motor2E,GPIO.HIGH)
-            
-            GPIO.output(Motor1A,GPIO.LOW)
-            GPIO.output(Motor1B,GPIO.HIGH)
-            GPIO.output(Motor1E,GPIO.HIGH)
-        
-        elif data=='4':
-
-            #Stop
-            GPIO.output(Motor1E,GPIO.LOW)
-            GPIO.output(Motor2E,GPIO.LOW)
->>>>>>> 8c9c445f511ed8d0907c1f9d6efdd47c09ecb850
-            
-        elif data=='5':
-
-            print 'Camera Up'
-
-        elif data=='6':
-
-            print 'Camera Down'
      
         if not data: 
             break
