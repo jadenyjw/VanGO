@@ -1,21 +1,22 @@
 import RPi.GPIO as GPIO
 import socket
 import sys
-from subprocess import call
+
 from thread import *
 from time import sleep
 
 GPIO.setmode(GPIO.BOARD)
 
-Motor1A = 16
-Motor1B = 18
-Motor1E = 22
+Motor1A = 11
+Motor1B = 13
+Motor1E = 15
 
-Motor2A = 23
-Motor2B = 21
-Motor2E = 19
+Motor2A = 36
+Motor2B = 38
+Motor2E = 40
 
-LED = 13
+LED = 32
+Servo = 22
 
 GPIO.setup(Motor1A,GPIO.OUT)
 GPIO.setup(Motor1B,GPIO.OUT)
@@ -26,6 +27,8 @@ GPIO.setup(Motor2B,GPIO.OUT)
 GPIO.setup(Motor2E,GPIO.OUT)
 
 GPIO.setup(LED, GPIO.OUT)
+
+GPIO.setup(Servo, GPIO.OUT)
 
 HOST = ''   # Symbolic name meaning all available interfaces
 PORT = 8888 # Arbitrary non-privileged port
